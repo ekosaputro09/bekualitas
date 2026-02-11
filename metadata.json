@@ -1,0 +1,5 @@
+{
+  "name": "BekuAlitas PO Manager",
+  "description": "A comprehensive Pre-Order management system for small frozen food businesses. Manage inventory, record orders with automatic stock deduction, and generate AI-powered marketing copy.",
+  "requestFramePermissions": []
+}
