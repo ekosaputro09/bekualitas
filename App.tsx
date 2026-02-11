@@ -1034,20 +1034,40 @@ export default function App() {
                      </div>
                      <div className="flex gap-2">
                         <Button 
+                          type="button"
                           variant="secondary" 
-                          className="h-8 w-8 p-0" 
+                          className="h-8 w-8 !p-0 flex items-center justify-center shrink-0" 
                           title="Salin Resep"
                           onClick={() => {
-                            navigator.clipboard.writeText(`${recipe.title}\n(${recipe.yieldInfo})\n\n${recipe.ingredients}`);
-                            window.alert("Resep disalin ke clipboard!");
+                            const text = `${recipe.title}\n(${recipe.yieldInfo})\n\n${recipe.ingredients}`;
+                            navigator.clipboard.writeText(text)
+                              .then(() => window.alert("Resep disalin ke clipboard!"))
+                              .catch(err => {
+                                console.error('Gagal menyalin: ', err);
+                                // Fallback for older browsers or non-secure contexts if needed, 
+                                // but alert is sufficient for now.
+                                window.alert("Gagal menyalin resep (Browser block).");
+                              });
                           }}
                         >
                            <DocumentDuplicateIcon className="w-4 h-4"/>
                         </Button>
-                        <Button variant="secondary" className="h-8 w-8 p-0" onClick={() => handleEditRecipe(recipe)}>
+                        <Button 
+                          type="button"
+                          variant="secondary" 
+                          className="h-8 w-8 !p-0 flex items-center justify-center shrink-0" 
+                          onClick={() => handleEditRecipe(recipe)}
+                          title="Edit Resep"
+                        >
                            <PencilSquareIcon className="w-4 h-4 text-blue-600"/>
                         </Button>
-                        <Button variant="secondary" className="h-8 w-8 p-0" onClick={() => handleDeleteRecipe(recipe.id)}>
+                        <Button 
+                          type="button"
+                          variant="secondary" 
+                          className="h-8 w-8 !p-0 flex items-center justify-center shrink-0" 
+                          onClick={() => handleDeleteRecipe(recipe.id)}
+                          title="Hapus Resep"
+                        >
                            <TrashIcon className="w-4 h-4 text-red-600"/>
                         </Button>
                      </div>
